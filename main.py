@@ -1,20 +1,15 @@
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler,ContextTypes
+from Controllers.TodoController import TodoController
 
-async def say_hello(update : Update, context : ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Hello Word")
-    
-async def echo(update : Update, context : ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(update.message.text)    
+TOKEN = "7862329646:AAEHNihtNBkCxojWgzRsSa-r6OfrYdLg9kE"
 
-application  = ApplicationBuilder().token("7862329646:AAEHNihtNBkCxojWgzRsSa-r6OfrYdLg9kE").build()
+application  = ApplicationBuilder().token(TOKEN).build()
 
-## he we captured the event from the API
+## he we captured the event from the API (WHIT COMMAND)
 
-application.add_handler(CommandHandler("start", say_hello))
-application.add_handler(CommandHandler("echo", echo))
-
-
+application.add_handler(CommandHandler("add", TodoController.add_todo))
+application.add_handler(CommandHandler("list", TodoController.list_todo))
 
 ## in this line we say react the all user send 
 application.run_polling(allowed_updates=Update.ALL_TYPES)
