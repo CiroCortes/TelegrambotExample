@@ -21,5 +21,21 @@ class TodoController:
         answer = ""
         for i, todo in enumerate(todo_list):
             answer = answer + f"{i + 1 } - { '✅' if todo.is_completed else '🚫'} {todo.title}\n "
-        await update.message.reply_text(answer)    
+        await update.message.reply_text(answer)
+        
+    @staticmethod
+    async def check_todo(update:Update , context : ContextTypes.DEFAULT_TYPE):
+        index = int(context.args[0])
+        if ( index > len(todo_list) or index <= 0 ) :
+            await update.message.reply_text("ERROR : Esa tarea no existe")
+            return
+        todo_list[index - 1].set_completed()  
+        await update.message.reply_text(f"La tarea {index} ha sido completada") 
+        await TodoController.list_todo(update, context)  
+        
+    @staticmethod  
+    async  def clear_todos(update:Update , context : ContextTypes.DEFAULT_TYPE):
+        todo_list.clear()
+        await update.message.reply_text("Tareas eliminadas")
+             
         

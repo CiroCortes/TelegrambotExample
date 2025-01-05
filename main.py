@@ -6,10 +6,12 @@ TOKEN = "7862329646:AAEHNihtNBkCxojWgzRsSa-r6OfrYdLg9kE"
 
 application  = ApplicationBuilder().token(TOKEN).build()
 
-## he we captured the event from the API (WHIT COMMAND)
+## He we captured the event from the API (WHIT COMMAND)
 
 application.add_handler(CommandHandler("add", TodoController.add_todo))
 application.add_handler(CommandHandler("list", TodoController.list_todo))
+application.add_handler(CommandHandler("check", TodoController.check_todo))
+application.add_handler(CommandHandler("clear", TodoController.clear_todos))
 
-## in this line we say react the all user send 
+## In this line we say react the all user send 
 application.run_polling(allowed_updates=Update.ALL_TYPES)

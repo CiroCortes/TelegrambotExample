@@ -4,5 +4,5 @@ class Todo:
         self.is_completed = False
     
     def set_completed(self):
-        self.set_completed = True    
+        self.is_completed = True    
         
